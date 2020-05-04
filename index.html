@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js'></script>
+    <script src="js/main.js"></script>
+    <title>Boolflix</title>
+</head>
+<body>
+    <input id="SearchInput" type="text">
+    <button id="SearchButton">Cerca</button>
+
+    <div class="Results"></div>
+    
+    <!-- Template -->
+    <script id="list-template" type="text/x-handlebars-template">
+        <ul class="Movie">
+            <li class="Movie-title">
+                {{ title }}
+            </li>
+            <li class="Movie-originalTitle">
+                {{ original_title }}
+            </li>
+            <li class="Movie-language">
+                {{ original_language }}
+            </li>
+            <li class="Movie-vote">
+                {{ vote_average }}
+            </li>
+        </ul>
+    </script>
+</body>
+</html>
