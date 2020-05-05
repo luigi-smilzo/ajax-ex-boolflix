@@ -1,7 +1,5 @@
 $(document).ready(function(){
     // REFERENCES 
-    var myApi = 'https://api.themoviedb.org/3/search/movie';
-    var myKey = '?api_key=26864016a30e377316e6a20d4e37109e';
     var searchInput = $('#SearchInput');
     var searchBtn = $('#SearchButton');
     var movieResults = $('.Results');
@@ -15,38 +13,63 @@ $(document).ready(function(){
     searchBtn.click(function() {
         var search = searchInput.val().trim();
         
-        // reset
-        searchInput.val('');
-        movieResults.html('');
+        if (search !== '') {
         
         $.ajax({
-            url: myApi + myKey,
+            url: 'https://api.themoviedb.org/3/search/movie',
             method: 'GET',
             data: {
+                api_key: '26864016a30e377316e6a20d4e37109e',
                 language: 'it-IT',
                 query: search
             },
             success: function(res) {
                 var results = res.results;
-                
-                for (var i = 0; i < results.length; i++ ) {
 
-                    var context = {
-                        title: results[i].title,
-                        originalTitle: results[i].original_title,
-                        originalLanguage: results[i].original_language,
-                        voteAverage: results[i].vote_average
-                    }
+                if (results.length > 0) {
+                    
+                    printResults(template, movieResults, results)
 
-                    var html = template(context);
-                    movieResults.append(html);
-
+                } else {
+                    alert('La ricerca non ha prodotto risultati');
+                    searchInput.focus().select();
                 }
+                
             },
             error: function() {
                 console.log('Errore chiamata');
             }
         });
+
+        } else {
+            alert('Campo di ricerca vuoto, inserisci una parola');
+            searchInput.focus();
+        }
+        
     });
 
 }); //<-- End ready
+
+/* FUNCTIONS */
+function printResults(template, container, results) {
+
+    resetResults(container);
+
+    for (var i = 0; i < results.length; i++ ) {
+        
+        var context = {
+            title: results[i].title,
+            originalTitle: results[i].original_title,
+            originalLanguage: results[i].original_language,
+            voteAverage: results[i].vote_average
+        }
+
+        var html = template(context);
+        container.append(html);
+    }
+
+}
+
+function resetResults(container) {
+    container.html('');
+}

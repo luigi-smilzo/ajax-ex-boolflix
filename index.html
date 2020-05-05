@@ -10,25 +10,34 @@
 </head>
 
 <body>
-    <input id="SearchInput" type="text">
-    <button id="SearchButton">Cerca</button>
+    <header>
+        <input id="SearchInput" type="text">
+        <button id="SearchButton">Cerca</button>
+    </header>
+    
 
-    <div class="Results"></div>
+    <main class="Results">
+
+    </main>
     
     <!-- Template -->
     <script id="list-template" type="text/x-handlebars-template">
         <ul class="Movie">
             <li class="Movie-title">
-                {{ title }}
+                <span>Titolo: </span>
+                <span>{{ title }}</span>
             </li>
             <li class="Movie-originalTitle">
-                {{ originalTitle }}
+                <span>Titolo originale: </span>
+                <span>{{ originalTitle }}</span>
             </li>
             <li class="Movie-language">
-                {{ originalLanguage }}
+                <span>Lingua originale: </span>
+                <span>{{ originalLanguage }}</span>
             </li>
             <li class="Movie-vote">
-                {{ voteAverage }}
+                <span>Voto: </span>
+                <span>{{ voteAverage }}</span>
             </li>
         </ul>
     </script>
