@@ -56,12 +56,13 @@ function printResults(template, container, results) {
     resetResults(container);
 
     for (var i = 0; i < results.length; i++ ) {
-        
+        var vote = results[i].vote_average;
+
         var context = {
             title: results[i].title,
             originalTitle: results[i].original_title,
             originalLanguage: results[i].original_language,
-            voteAverage: results[i].vote_average
+            voteAverage: rateStars(vote)
         }
 
         var html = template(context);
@@ -72,4 +73,20 @@ function printResults(template, container, results) {
 
 function resetResults(container) {
     container.html('');
+}
+
+function rateStars(vote) {
+    var rating = Math.ceil( vote / 2 );
+    var emptyStars = 5 - rating;
+    var starString = '';
+
+    for (var j = 0; j < rating; j++) {
+        starString += '<i class="fas fa-star"></i>';
+    }
+    
+    for (var k = 0; k < emptyStars; k++) {
+        starString += '<i class="far fa-star"></i>';
+    }
+
+    return starString
 }
