@@ -26,11 +26,11 @@
         <ul class="Movie">
             <li class="Movie-title">
                 <span>Titolo: </span>
-                <span>{{ title }}</span>
+                <span>{{ title }}{{ name }}</span>
             </li>
             <li class="Movie-originalTitle">
                 <span>Titolo originale: </span>
-                <span>{{ originalTitle }}</span>
+                <span>{{ originalTitle }}{{ originalName }}</span>
             </li>
             <li class="Movie-language">
                 <span>Lingua originale: </span>
@@ -39,6 +39,10 @@
             <li class="Movie-vote">
                 <span>Voto: </span>
                 <span>{{{ voteAverage }}}</span>
+            </li>
+            <li class="Movie-format">
+                <span>Tipo: </span>
+                <span>{{{ type }}}</span>
             </li>
         </ul>
     </script>

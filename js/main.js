@@ -3,6 +3,8 @@ $(document).ready(function(){
     var searchInput = $('#SearchInput');
     var searchBtn = $('#SearchButton');
     var movieResults = $('.Results');
+    var queryMovie = 'Film';
+    var queryTv = 'Serie tv';
 
     // HANDLEBARS INIT
     var source = $('#list-template').html();
@@ -12,7 +14,8 @@ $(document).ready(function(){
     // Search
     searchBtn.click(function() {
         var search = searchInput.val().trim();
-        
+        resetResults(movieResults);
+
         if (search !== '') {
         
         $.ajax({
@@ -28,10 +31,36 @@ $(document).ready(function(){
 
                 if (results.length > 0) {
                     
-                    printResults(template, movieResults, results)
+                    printResults(template, movieResults, results, queryMovie)
 
                 } else {
-                    alert('La ricerca non ha prodotto risultati');
+                    alert('Non sono stati trovati film');
+                    searchInput.focus().select();
+                }
+                
+            },
+            error: function() {
+                console.log('Errore chiamata');
+            }
+        });
+        
+        $.ajax({
+            url: 'https://api.themoviedb.org/3/search/tv',
+            method: 'GET',
+            data: {
+                api_key: '26864016a30e377316e6a20d4e37109e',
+                language: 'it-IT',
+                query: search
+            },
+            success: function(res) {
+                var results = res.results;
+
+                if (results.length > 0) {
+                    
+                    printResults(template, movieResults, results, queryTv)
+
+                } else {
+                    alert('Non sono state trovate serie tv');
                     searchInput.focus().select();
                 }
                 
@@ -51,9 +80,7 @@ $(document).ready(function(){
 }); //<-- End ready
 
 /* FUNCTIONS */
-function printResults(template, container, results) {
-
-    resetResults(container);
+function printResults(template, container, results, format) {
 
     for (var i = 0; i < results.length; i++ ) {
         var vote = results[i].vote_average;
@@ -61,9 +88,12 @@ function printResults(template, container, results) {
 
         var context = {
             title: results[i].title,
+            name: results[i].name,
             originalTitle: results[i].original_title,
+            originalName: results[i].original_name,
             originalLanguage: languageFlag(langCode),
-            voteAverage: rateStars(vote)
+            voteAverage: rateStars(vote),
+            type: format
         }
 
         var html = template(context);
