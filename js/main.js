@@ -57,11 +57,12 @@ function printResults(template, container, results) {
 
     for (var i = 0; i < results.length; i++ ) {
         var vote = results[i].vote_average;
+        var langCode = results[i].original_language;
 
         var context = {
             title: results[i].title,
             originalTitle: results[i].original_title,
-            originalLanguage: results[i].original_language,
+            originalLanguage: languageFlag(langCode),
             voteAverage: rateStars(vote)
         }
 
@@ -73,6 +74,14 @@ function printResults(template, container, results) {
 
 function resetResults(container) {
     container.html('');
+}
+
+function languageFlag(langCode) {
+    if (langCode != 'it' && langCode != 'en') {
+        return langCode
+    } else {
+        return '<img src="img/' + langCode + '.svg" style="width:15px;">'
+    }
 }
 
 function rateStars(vote) {
