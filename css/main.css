@@ -12,18 +12,38 @@ body {
     color: #fff;
 }
 
+ul {
+    list-style: none;
+}
+
 /* UTILITIES */
 
 .u-flex {
     display: flex;
 }
 
-.u-spaceBtw {
+.u-justifyBtw {
     justify-content: space-between;
+}
+
+.u-justifyCtr {
+    justify-content: center;
+}
+
+.u-wrap {
+    flex-wrap: wrap;
 }
 
 .u-alignCtr {
     align-items: center;
+}
+
+.u-relative {
+    position: relative;
+}
+
+.u-absolute {
+    position: absolute;
 }
 
 /* LAYOUT */
@@ -39,4 +59,39 @@ body {
     text-transform: uppercase;
     color: red;
     font-weight: 900;
+}
+
+/* Main */
+
+.Results-card {
+    margin: 30px;
+    border: 1px solid #ccc;
+}
+
+.Movie {
+    opacity: 0;
+    width: 342px;
+    height: 100%;
+    padding: 140px 15px;
+    background: rgba(0, 0, 0, .9);
+    line-height: 26px;
+    top: 0;
+    left: 0;
+    transition: opacity .2s linear;
+}
+
+.Movie:hover {
+    opacity: 1;
+}
+
+.Movie li span:first-child {
+    font-weight: 700;
+}
+
+.Movie li span:nth-child(2) {
+    font-weight: 300;
+}
+
+.Movie-vote span:last-child {
+    color: rgb(255, 208, 0);
 }

@@ -52,7 +52,7 @@ function printResults(template, container, results, type) {
             voteAverage: rateStars(results[i].vote_average),
             type: type,
             posterPath: posterPath(results[i].poster_path),
-            overview: overview.substr(0, 150) + '...'
+            overview: overview.substr(0, 200) + '...'
         }
 
         var html = template(context);
