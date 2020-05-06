@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    // REFERENCES 
+    
+    // References 
     var searchInput = $('#SearchInput');
     var searchBtn = $('#SearchButton');
     var movieResults = $('.Results');
@@ -9,11 +10,11 @@ $(document).ready(function(){
         language: 'it-IT',
     }
 
-    // HANDLEBARS INIT
+    // Handlebars
     var source = $('#list-template').html();
     var template = Handlebars.compile(source);
 
-    // EVENTS
+
     // Search
     searchBtn.click(function() {
         showSearchResults(apiQueryObj, searchInput, template, movieResults);
@@ -27,7 +28,9 @@ $(document).ready(function(){
 
 }); //<-- End ready
 
+
 /* FUNCTIONS */
+
 function printResults(template, container, results, type) {
 
     for (var i = 0; i < results.length; i++ ) {
@@ -114,6 +117,7 @@ function apiRequest(object, movieOrTv, search, template, container, type) {
 }
 
 function showSearchResults(object, searchInput, template, container) {
+    
     var search = searchInput.val().trim();
     resetResults(container);
 
