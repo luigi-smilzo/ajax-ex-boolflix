@@ -20,6 +20,13 @@ $(document).ready(function(){
         showSearchResults(apiQueryObj, search, template, movieResults);
     });
 
+    searchInput.keypress(function(e) {
+        if (e.which == 13) {
+            var search = searchInput.val().trim();
+            showSearchResults(apiQueryObj, search, template, movieResults);
+        }
+    });
+
 }); //<-- End ready
 
 /* FUNCTIONS */
