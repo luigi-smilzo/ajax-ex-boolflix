@@ -59,6 +59,37 @@ ul {
     text-transform: uppercase;
     color: red;
     font-weight: 900;
+    user-select: none;
+}
+
+.Header-searchBar #SearchInput {
+    height: 30px;
+    width: 300px;
+    padding: 0 20px;
+    border-radius: 15px;
+    border-style: none;
+    outline: none;
+    font-family: 'Roboto';
+    font-size: 1.2em;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.Header-searchBar #SearchInput:focus {
+    box-shadow: 0px 0px 2px 2px rgb(0, 162, 255);
+}
+
+.Header-searchBar #SearchButton {
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    border-style: none;
+    line-height: 30px;
+    font-size: .9em;
+    margin-left: 5px;
+    background: red;
+    color: #fff;
+    cursor: pointer;
 }
 
 /* Main */
@@ -66,6 +97,7 @@ ul {
 .Results-card {
     margin: 30px;
     border: 1px solid #ccc;
+    cursor: pointer;
 }
 
 .Results-card img {
@@ -77,7 +109,7 @@ ul {
 .Movie {
     opacity: 0;
     width: 342px;
-    height: 513px;
+    height: 100%;
     padding: 140px 15px;
     background: rgba(0, 0, 0, .9);
     line-height: 26px;
