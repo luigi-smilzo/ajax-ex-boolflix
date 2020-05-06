@@ -16,14 +16,12 @@ $(document).ready(function(){
     // EVENTS
     // Search
     searchBtn.click(function() {
-        var search = searchInput.val().trim();
-        showSearchResults(apiQueryObj, search, template, movieResults);
+        showSearchResults(apiQueryObj, searchInput, template, movieResults);
     });
 
     searchInput.keypress(function(e) {
         if (e.which == 13) {
-            var search = searchInput.val().trim();
-            showSearchResults(apiQueryObj, search, template, movieResults);
+            showSearchResults(apiQueryObj, searchInput, template, movieResults);
         }
     });
 
@@ -115,8 +113,8 @@ function apiRequest(object, movieOrTv, search, template, container, type) {
     })
 }
 
-function showSearchResults(object, search, template, container) {
-    
+function showSearchResults(object, searchInput, template, container) {
+    var search = searchInput.val().trim();
     resetResults(container);
 
     if (search !== '') {
