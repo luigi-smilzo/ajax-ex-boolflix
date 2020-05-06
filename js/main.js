@@ -50,7 +50,7 @@ function printResults(template, container, results, type) {
             originalLanguage: languageFlag(results[i].original_language),
             voteAverage: rateStars(results[i].vote_average),
             type: type,
-            posterPath: 'https://image.tmdb.org/t/p/' + 'w342/' + results[i].poster_path
+            posterPath: posterPath(results[i].poster_path)
         }
 
         var html = template(context);
@@ -127,5 +127,13 @@ function showSearchResults(object, searchInput, template, container) {
     } else {
         alert('Campo di ricerca vuoto, inserisci una parola');
         search.focus();
+    }
+}
+
+function posterPath(posterPath) {
+    if (posterPath == null) {
+        return 'img/no-poster.png'
+    } else {
+        return 'https://image.tmdb.org/t/p/' + 'w342/' + posterPath
     }
 }
