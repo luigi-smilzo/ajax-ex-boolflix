@@ -3,6 +3,11 @@ $(document).ready(function(){
     var searchInput = $('#SearchInput');
     var searchBtn = $('#SearchButton');
     var movieResults = $('.Results');
+    var apiQueryObj = {
+        url: 'https://api.themoviedb.org/3/search/',
+        api_key: '26864016a30e377316e6a20d4e37109e',
+        language: 'it-IT',
+    }
 
     // HANDLEBARS INIT
     var source = $('#list-template').html();
@@ -16,61 +21,12 @@ $(document).ready(function(){
 
         if (search !== '') {
         
-        $.ajax({
-            url: 'https://api.themoviedb.org/3/search/movie',
-            method: 'GET',
-            data: {
-                api_key: '26864016a30e377316e6a20d4e37109e',
-                language: 'it-IT',
-                query: search
-            },
-            success: function(res) {
-                var results = res.results;
-
-                if (results.length > 0) {
-                    
-                    printResults(template, movieResults, results, 'Film')
-
-                } else {
-                    console.log('Non sono stati trovati film');
-                    searchInput.focus().select();
-                }
-                
-            },
-            error: function() {
-                console.log('Errore chiamata');
-            }
-        });
-        
-        $.ajax({
-            url: 'https://api.themoviedb.org/3/search/tv',
-            method: 'GET',
-            data: {
-                api_key: '26864016a30e377316e6a20d4e37109e',
-                language: 'it-IT',
-                query: search
-            },
-            success: function(res) {
-                var results = res.results;
-
-                if (results.length > 0) {
-                    
-                    printResults(template, movieResults, results, 'Serie Tv')
-
-                } else {
-                    console.log('Non sono state trovate serie tv');
-                    searchInput.focus().select();
-                }
-                
-            },
-            error: function() {
-                console.log('Errore chiamata');
-            }
-        });
+            apiRequest(apiQueryObj, 'movie', search, template, movieResults);
+            apiRequest(apiQueryObj, 'tv', search, template, movieResults);
 
         } else {
             alert('Campo di ricerca vuoto, inserisci una parola');
-            searchInput.focus();
+            search.focus();
         }
         
     });
@@ -86,7 +42,7 @@ function printResults(template, container, results, type) {
         if (type == 'Film') {
             title = results[i].title;
             originalTitle = results[i].original_title; 
-        } else if (type == 'Serie Tv') {
+        } else if (type == 'tv') {
             title = results[i].name;
             originalTitle = results[i].original_name;
         }
@@ -131,4 +87,31 @@ function rateStars(vote) {
     }
 
     return starString
+}
+
+function apiRequest(object, filmOrTv, search, template, container) {
+    $.ajax({
+        url: object.url + filmOrTv,
+        method: 'GET',
+        data: {
+            api_key: object.api_key,
+            language: object.language,
+            query: search
+        },
+        success: function(res) {
+            var results = res.results;
+
+            if (results.length > 0) {
+                
+                printResults(template, container, results, filmOrTv)
+
+            } else {
+                console.log('No', filmOrTv, 'found');
+            }
+            
+        },
+        error: function() {
+            console.log('Errore chiamata');
+        }
+    })
 }
