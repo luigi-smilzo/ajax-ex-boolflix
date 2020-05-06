@@ -21,8 +21,8 @@ $(document).ready(function(){
 
         if (search !== '') {
         
-            apiRequest(apiQueryObj, 'movie', search, template, movieResults);
-            apiRequest(apiQueryObj, 'tv', search, template, movieResults);
+            apiRequest(apiQueryObj, 'movie', search, template, movieResults, 'Film');
+            apiRequest(apiQueryObj, 'tv', search, template, movieResults, 'Serie Tv');
 
         } else {
             alert('Campo di ricerca vuoto, inserisci una parola');
@@ -42,7 +42,7 @@ function printResults(template, container, results, type) {
         if (type == 'Film') {
             title = results[i].title;
             originalTitle = results[i].original_title; 
-        } else if (type == 'tv') {
+        } else if (type == 'Serie Tv') {
             title = results[i].name;
             originalTitle = results[i].original_name;
         }
@@ -89,9 +89,9 @@ function rateStars(vote) {
     return starString
 }
 
-function apiRequest(object, filmOrTv, search, template, container) {
+function apiRequest(object, movieOrTv, search, template, container, type) {
     $.ajax({
-        url: object.url + filmOrTv,
+        url: object.url + movieOrTv,
         method: 'GET',
         data: {
             api_key: object.api_key,
@@ -103,10 +103,10 @@ function apiRequest(object, filmOrTv, search, template, container) {
 
             if (results.length > 0) {
                 
-                printResults(template, container, results, filmOrTv)
+                printResults(template, container, results, type)
 
             } else {
-                console.log('No', filmOrTv, 'found');
+                console.log('No', movieOrTv, 'found');
             }
             
         },
