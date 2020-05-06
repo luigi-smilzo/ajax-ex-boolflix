@@ -1,0 +1,42 @@
+/* GENERAL STYLES */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background:#333;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
+
+/* UTILITIES */
+
+.u-flex {
+    display: flex;
+}
+
+.u-spaceBtw {
+    justify-content: space-between;
+}
+
+.u-alignCtr {
+    align-items: center;
+}
+
+/* LAYOUT */
+/* Header */
+.Header {
+    height: 80px;
+    background: #000;
+    padding: 0 30px;
+}
+
+.Header-logo {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    color: red;
+    font-weight: 900;
+}

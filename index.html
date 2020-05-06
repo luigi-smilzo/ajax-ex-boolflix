@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="css/main.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js'></script>
     <script src="js/main.js"></script>
@@ -11,14 +13,41 @@
 </head>
 
 <body>
-    <header>
-        <input id="SearchInput" type="text">
-        <button id="SearchButton">Cerca</button>
+    <header class="Header u-flex u-spaceBtw u-alignCtr">
+        <div class="Header-logo">
+            boolflix
+        </div>
+        <div class="Header-searchBar">
+            <input id="SearchInput" type="text">
+            <button id="SearchButton">Cerca</button>
+        </div>
     </header>
     
 
     <main class="Results">
-
+        <ul class="Movie">
+            <img src="https://image.tmdb.org/t/p/w342//b3R1LWvraY6RJWfIu3aLXBF1ra8.jpg" alt="">
+            <li class="Movie-title">
+                <span>Titolo: </span>
+                <span>Fantozzi</span>
+            </li>
+            <li class="Movie-originalTitle">
+                <span>Titolo originale: </span>
+                <span>Fantozzi</span>
+            </li>
+            <li class="Movie-language">
+                <span>Lingua originale: </span>
+                <span><img src="img/it.svg" style="width:20px;"></span>
+            </li>
+            <li class="Movie-vote">
+                <span>Voto: </span>
+                <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span>
+            </li>
+            <li class="Movie-format">
+                <span>Tipo: </span>
+                <span>Film</span>
+            </li>
+        </ul>
     </main>
     
     <!-- Template -->
@@ -44,6 +73,10 @@
             <li class="Movie-format">
                 <span>Tipo: </span>
                 <span>{{{ type }}}</span>
+            </li>
+            <li class="Movie-overview">
+                <span>Overview: </span>
+                <span>{{{ overview }}}</span>
             </li>
         </ul>
     </script>

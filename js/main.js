@@ -35,6 +35,7 @@ function printResults(template, container, results, type) {
 
     for (var i = 0; i < results.length; i++ ) {
         var title, originalTitle;
+        var overview = results[i].overview;
 
         if (type == 'Film') {
             title = results[i].title;
@@ -50,7 +51,8 @@ function printResults(template, container, results, type) {
             originalLanguage: languageFlag(results[i].original_language),
             voteAverage: rateStars(results[i].vote_average),
             type: type,
-            posterPath: posterPath(results[i].poster_path)
+            posterPath: posterPath(results[i].poster_path),
+            overview: overview.substr(0, 150) + '...'
         }
 
         var html = template(context);
