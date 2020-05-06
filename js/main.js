@@ -48,7 +48,8 @@ function printResults(template, container, results, type) {
             originalTitle: originalTitle,
             originalLanguage: languageFlag(results[i].original_language),
             voteAverage: rateStars(results[i].vote_average),
-            type: type
+            type: type,
+            posterPath: 'https://image.tmdb.org/t/p/' + 'w342/' + results[i].poster_path
         }
 
         var html = template(context);
