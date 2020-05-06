@@ -17,18 +17,7 @@ $(document).ready(function(){
     // Search
     searchBtn.click(function() {
         var search = searchInput.val().trim();
-        resetResults(movieResults);
-
-        if (search !== '') {
-        
-            apiRequest(apiQueryObj, 'movie', search, template, movieResults, 'Film');
-            apiRequest(apiQueryObj, 'tv', search, template, movieResults, 'Serie Tv');
-
-        } else {
-            alert('Campo di ricerca vuoto, inserisci una parola');
-            search.focus();
-        }
-        
+        showSearchResults(apiQueryObj, search, template, movieResults);
     });
 
 }); //<-- End ready
@@ -114,4 +103,18 @@ function apiRequest(object, movieOrTv, search, template, container, type) {
             console.log('Errore chiamata');
         }
     })
+}
+
+function showSearchResults(object, search, template, container) {
+    resetResults(container);
+
+        if (search !== '') {
+        
+            apiRequest(object, 'movie', search, template, container, 'Film');
+            apiRequest(object, 'tv', search, template, container, 'Serie Tv');
+
+        } else {
+            alert('Campo di ricerca vuoto, inserisci una parola');
+            search.focus();
+        }
 }
