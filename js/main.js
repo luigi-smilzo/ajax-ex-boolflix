@@ -47,7 +47,6 @@ function printResults(template, container, results, type) {
         var html = template(context);
         container.append(html);
     }
-
 }
 
 function resetResults(container) {
@@ -55,6 +54,7 @@ function resetResults(container) {
 }
 
 function languageFlag(langCode) {
+   
     if (langCode != 'it' && langCode != 'en') {
         return langCode
     } else {
@@ -63,6 +63,7 @@ function languageFlag(langCode) {
 }
 
 function rateStars(vote) {
+    
     var rating = Math.ceil( vote / 2 );
     var emptyStars = 5 - rating;
     var starString = '';
@@ -79,6 +80,7 @@ function rateStars(vote) {
 }
 
 function apiRequest(object, movieOrTv, search, template, container, type) {
+    
     $.ajax({
         url: object.url + movieOrTv,
         method: 'GET',
@@ -106,15 +108,14 @@ function apiRequest(object, movieOrTv, search, template, container, type) {
 }
 
 function showSearchResults(object, search, template, container) {
+    
     resetResults(container);
 
-        if (search !== '') {
-        
-            apiRequest(object, 'movie', search, template, container, 'Film');
-            apiRequest(object, 'tv', search, template, container, 'Serie Tv');
-
-        } else {
-            alert('Campo di ricerca vuoto, inserisci una parola');
-            search.focus();
-        }
+    if (search !== '') {
+        apiRequest(object, 'movie', search, template, container, 'Film');
+        apiRequest(object, 'tv', search, template, container, 'Serie Tv');
+    } else {
+        alert('Campo di ricerca vuoto, inserisci una parola');
+        search.focus();
+    }
 }
