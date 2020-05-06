@@ -3,8 +3,6 @@ $(document).ready(function(){
     var searchInput = $('#SearchInput');
     var searchBtn = $('#SearchButton');
     var movieResults = $('.Results');
-    var queryMovie = 'Film';
-    var queryTv = 'Serie tv';
 
     // HANDLEBARS INIT
     var source = $('#list-template').html();
@@ -31,10 +29,10 @@ $(document).ready(function(){
 
                 if (results.length > 0) {
                     
-                    printResults(template, movieResults, results, queryMovie)
+                    printResults(template, movieResults, results, 'Film')
 
                 } else {
-                    alert('Non sono stati trovati film');
+                    console.log('Non sono stati trovati film');
                     searchInput.focus().select();
                 }
                 
@@ -57,10 +55,10 @@ $(document).ready(function(){
 
                 if (results.length > 0) {
                     
-                    printResults(template, movieResults, results, queryTv)
+                    printResults(template, movieResults, results, 'Serie Tv')
 
                 } else {
-                    alert('Non sono state trovate serie tv');
+                    console.log('Non sono state trovate serie tv');
                     searchInput.focus().select();
                 }
                 
@@ -80,20 +78,25 @@ $(document).ready(function(){
 }); //<-- End ready
 
 /* FUNCTIONS */
-function printResults(template, container, results, format) {
+function printResults(template, container, results, type) {
 
     for (var i = 0; i < results.length; i++ ) {
-        var vote = results[i].vote_average;
-        var langCode = results[i].original_language;
+        var title, originalTitle;
+
+        if (type == 'Film') {
+            title = results[i].title;
+            originalTitle = results[i].original_title; 
+        } else if (type == 'Serie Tv') {
+            title = results[i].name;
+            originalTitle = results[i].original_name;
+        }
 
         var context = {
-            title: results[i].title,
-            name: results[i].name,
-            originalTitle: results[i].original_title,
-            originalName: results[i].original_name,
-            originalLanguage: languageFlag(langCode),
-            voteAverage: rateStars(vote),
-            type: format
+            title: title,
+            originalTitle: originalTitle,
+            originalLanguage: languageFlag(results[i].original_language),
+            voteAverage: rateStars(results[i].vote_average),
+            type: type
         }
 
         var html = template(context);
@@ -110,7 +113,7 @@ function languageFlag(langCode) {
     if (langCode != 'it' && langCode != 'en') {
         return langCode
     } else {
-        return '<img src="img/' + langCode + '.svg" style="width:15px;">'
+        return '<img src="img/' + langCode + '.svg" style="width:20px;">'
     }
 }
 
