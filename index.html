@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap">
     <link rel="stylesheet" href="css/main.css">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js'></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/functions.js" defer></script>
     <title>Boolflix</title>
 </head>
 
@@ -17,48 +17,53 @@
         <div class="Header-logo">
             boolflix
         </div>
-        <div class="Header-searchBar">
-            <input id="SearchInput" type="text" placeholder="Cerca...">
+        <div class="Header-searchBar u-flex">
+            <input id="SearchInput" type="text" placeholder="Film preferito?">
             <button id="SearchButton"><i class="fas fa-search"></i></button>
         </div>
     </header>
     
+    <div class="Loader">
+        
+    </div>
 
     <main class="Results u-flex u-justifyCtr u-wrap">
-        
     </main>
     
     <!-- Template -->
     <script id="list-template" type="text/x-handlebars-template">
-        <div class="Results-card u-relative">
-            <img src="{{ posterPath }}" alt="">
-            <ul class="Movie u-absolute">
-                <li class="Movie-title">
-                    <span>Titolo: </span>
-                    <span>{{ title }}</span>
-                </li>
-                <li class="Movie-originalTitle">
-                    <span>Titolo originale: </span>
-                    <span>{{ originalTitle }}</span>
-                </li>
-                <li class="Movie-language">
-                    <span>Lingua originale: </span>
-                    <span>{{{ originalLanguage }}}</span>
-                </li>
-                <li class="Movie-vote">
-                    <span>Voto: </span>
-                    <span>{{{ voteAverage }}}</span>
-                </li>
-                <li class="Movie-format">
-                    <span>Tipo: </span>
-                    <span>{{{ type }}}</span>
-                </li>
-                <li class="Movie-overview">
-                    <span>Overview: </span>
-                    <span>{{{ overview }}}</span>
-                </li>
-            </ul>
-        </div>
+        <label for="{{ index }}">
+            <div class="Results-card u-relative">
+                <img src="{{ posterPath }}" alt="" width="342" height="517">
+                <input type="checkbox" name="" id="{{ index }}">
+                <ul class="Movie u-absolute">
+                    <li class="Movie-title">
+                        <span>Titolo: </span>
+                        <span>{{ title }}</span>
+                    </li>
+                    <li class="Movie-originalTitle">
+                        <span>Titolo originale: </span>
+                        <span>{{ originalTitle }}</span>
+                    </li>
+                    <li class="Movie-language">
+                        <span>Lingua originale: </span>
+                        <span>{{{ originalLanguage }}}</span>
+                    </li>
+                    <li class="Movie-vote">
+                        <span>Voto: </span>
+                        <span>{{{ voteAverage }}}</span>
+                    </li>
+                    <li class="Movie-format">
+                        <span>Tipo: </span>
+                        <span>{{{ type }}}</span>
+                    </li>
+                    <li class="Movie-overview">
+                        <span>Overview: </span>
+                        <span>{{{ overview }}}</span>
+                    </li>
+                </ul>
+            </div>
+        </label>
     </script>
 </body>
 </html>

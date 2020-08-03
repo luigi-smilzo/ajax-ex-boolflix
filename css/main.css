@@ -4,6 +4,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+*::-webkit-scrollbar {
+    display: none;
 }
 
 body {
@@ -11,6 +17,7 @@ body {
     font-family: 'Roboto', sans-serif;
     color: #fff;
 }
+
 
 ul {
     list-style: none;
@@ -84,7 +91,6 @@ ul {
     width: 30px;
     border-radius: 100%;
     border-style: none;
-    line-height: 30px;
     font-size: .9em;
     margin-left: 5px;
     background: red;
@@ -92,18 +98,22 @@ ul {
     cursor: pointer;
 }
 
-/* Main */
+.Header-searchBar #SearchButton i {
+    vertical-align: top;
+}
 
+/* Main */
 .Results-card {
     margin: 30px;
     border: 1px solid #ccc;
     cursor: pointer;
+    width: 342;
+    height: 517;
 }
 
 .Results-card img {
     object-fit: cover;
-    width: 100%;
-    height: 100%;
+    vertical-align: top;
 }
 
 .Movie {
@@ -132,4 +142,50 @@ ul {
 
 .Movie-vote span:last-child {
     color: rgb(255, 208, 0);
+}
+
+.NoResults {
+    opacity: 0;
+    margin-top: 80px;
+    color: #ccc;
+    font-size: 1.8em;
+    font-weight: 300;
+}
+
+.Loader {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    min-height: calc(100vh - 80px);
+    width: 100%;
+    opacity: 0;
+    background: red;
+    transition: opacity .4s;
+}
+
+.Loader.is-active {
+    opacity: 1;
+    z-index: 1;
+}
+
+input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+}
+
+@media all and (max-width: 375px) {
+    .Header {
+        height: 105px;
+        flex-direction: column;
+        padding: 15px 0 15px 0;
+    }
+
+    .Loader {
+        min-height: calc(100vh - 105px);
+    }
+
+    input[type=checkbox]:checked + .Movie {
+        opacity: 1;
+    }
 }
